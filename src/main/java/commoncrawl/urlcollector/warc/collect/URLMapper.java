@@ -17,7 +17,7 @@ import org.archive.io.ArchiveRecordHeader;
 
 public class URLMapper extends Mapper<Text, ArchiveReader, Text, LongWritable> {
 	private Text outKey = new Text();
-	public static String URL_KEYWORD = "";
+	private final String URL_KEYWORD = "example";
 	private final String FORM_HTML_TAG = "<form(\"[^\"]*\"|'[^']*'|[^'\">])*>";
 	private final String HTML_LANG_TAG = "<html.+?\\slang=[\'\"](.+?)[\'\"]\\s.+?>";
 	private static final Logger LOG = Logger.getLogger(URLMapper.class);

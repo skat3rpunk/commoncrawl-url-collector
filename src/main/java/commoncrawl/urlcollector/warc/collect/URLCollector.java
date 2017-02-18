@@ -21,11 +21,10 @@ public class URLCollector extends Configured implements Tool {
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 		String[] xArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
-		if (xArgs.length != 3) {
-			System.err.println("Usage: URLCollector <url-keyword> <in> <out>");
+		if (xArgs.length != 2) {
+			System.err.println("Usage: URLCollector <in> <out>");
 			System.exit(1);
 		}
-		URLMapper.URL_KEYWORD = args[0];
 		int res = ToolRunner.run(conf, new URLCollector(), xArgs);
 		System.exit(res);
 	}
@@ -36,8 +35,8 @@ public class URLCollector extends Configured implements Tool {
 		Job job = new Job(conf);
 		job.setJarByClass(URLCollector.class);
 		job.setNumReduceTasks(1);
-		FileInputFormat.addInputPath(job, new Path(args[1]));
-		FileOutputFormat.setOutputPath(job, new Path(args[2]));
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		job.setInputFormatClass(WARCFileInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 		job.setOutputKeyClass(Text.class);
